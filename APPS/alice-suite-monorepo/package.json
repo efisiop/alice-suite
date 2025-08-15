@@ -1,0 +1,28 @@
+{
+  "name": "alice-suite-monorepo",
+  "version": "1.0.0",
+  "description": "Alice Suite - Monorepo containing reader and consultant dashboard applications",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:reader": "pnpm --filter alice-reader dev",
+    "dev:dashboard": "pnpm --filter alice-consultant-dashboard dev",
+    "dev": "pnpm -r --parallel dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "type-check": "pnpm -r type-check",
+    "clean": "pnpm -r clean",
+    "install:all": "pnpm install"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "packageManager": "pnpm@10.7.0",
+  "keywords": ["alice-suite", "monorepo", "react", "typescript", "supabase"],
+  "author": "",
+  "license": "ISC"
+}

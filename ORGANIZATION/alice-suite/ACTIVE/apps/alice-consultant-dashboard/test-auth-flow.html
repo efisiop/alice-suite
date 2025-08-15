@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Auth Flow - Consultant Dashboard</title>
+</head>
+<body>
+    <h1>Testing Consultant Dashboard Authentication</h1>
+    
+    <h2>Test Results:</h2>
+    <div id="results"></div>
+    
+    <h2>Manual Test Steps:</h2>
+    <ol>
+        <li>Open browser console (F12)</li>
+        <li>Navigate to: <a href="http://localhost:5177/login" target="_blank">http://localhost:5177/login</a></li>
+        <li>Use credentials: consultant@alice.com / consultant123</li>
+        <li>Check console for authentication logs</li>
+    </ol>
+
+    <script>
+        const results = document.getElementById('results');
+        
+        // Test 1: Check if Supabase is accessible
+        fetch('https://blwypdcobizmpidmuhvq.supabase.co/auth/v1/token?grant_type=password', {
+            method: 'POST',
+            headers: {
+                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJsd3lwZGNvYml6bXBpZG11aHZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQyMDgzNDcsImV4cCI6MjA1OTc4NDM0N30.YP2r-CnSaM4rKclXBivanAMBQh9sMsI95F2p87zIuWM',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: 'consultant@alice.com',
+                password: 'consultant123'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.access_token) {
+                results.innerHTML += '<p style="color: green">✅ Supabase Authentication: WORKING</p>';
+                results.innerHTML += '<p>JWT Token: ' + data.access_token.substring(0, 50) + '...</p>';
+            } else {
+                results.innerHTML += '<p style="color: red">❌ Supabase Authentication: FAILED</p>';
+                results.innerHTML += '<p>Error: ' + JSON.stringify(data) + '</p>';
+            }
+        })
+        .catch(error => {
+            results.innerHTML += '<p style="color: red">❌ Supabase Authentication: ERROR</p>';
+            results.innerHTML += '<p>Error: ' + error.message + '</p>';
+        });
+
+        // Test 2: Check if dashboard is accessible
+        fetch('http://localhost:5177/login')
+        .then(response => {
+            if (response.ok) {
+                results.innerHTML += '<p style="color: green">✅ Consultant Dashboard: RUNNING on port 5177</p>';
+            } else {
+                results.innerHTML += '<p style="color: red">❌ Consultant Dashboard: NOT RESPONDING</p>';
+            }
+        })
+        .catch(error => {
+            results.innerHTML += '<p style="color: red">❌ Consultant Dashboard: CONNECTION ERROR</p>';
+        });
+
+        // Test 3: Check database profile
+        setTimeout(() => {
+            fetch('https://blwypdcobizmpidmuhvq.supabase.co/rest/v1/profiles?email=eq.consultant@alice.com', {
+                method: 'GET',
+                headers: {
+                    'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJsd3lwZGNvYml6bXBpZG11aHZxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NDIwODM0NywiZXhwIjoyMDU5Nzg0MzQ3fQ.zpjHLx0VgZh8l3VllMLW_Hcpzf6zTxm7ZQW-OrXCI8I',
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2Jsd3lwZGNvYml6bXBpZG11aHZxLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJjMzJlZDEyMC1jMzU0LTRkYzAtOWNhNy02Y2Y5MGFjNmU5MzkiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU0MTMyMzE4LCJpYXQiOjE3NTQxMjg3MTgsImVtYWlsIjoiY29uc3VsdGFudEBhbGljZS5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIiwicHJvdmlkZXJzIjpbImVtYWlsIl19LCJ1c2VyX21ldGFkYXRhIjp7ImJvb2tfdmVyaWZpZWQiOnRydWUsImVtYWlsIjoiY29uc3VsdGFudEBhbGljZS5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyc3RfbmFtZSI6IkFsaWNlIiwiaXNfY29uc3VsdGFudCI6dHJ1ZSwibGFzdF9uYW1lIjoiQ29uc3VsdGFudCIsInBob25lX3ZlcmlmaWVkIjpmYWxzZSwic3ViIjoiYzMyZWQxMjAtYzM1NC00ZGMwLTljYTctNmNmOTBhYzZlOTM5In0sInJvbGUiOiJhdXRoZW50aWNhdGVkIiwiYWFsIjoiYWFsMSIsImFtciI6W3sibWV0aG9kIjoicGFzc3dvcmQiLCJ0aW1lc3RhbXAiOjE3NTQxMjg3MTh9XSwic2Vzc2lvbl9pZCI6IjA3NDMyNDA5LTIyYzEtNDlhNi05NjcxLTQyODJmZDhhMjhlNSIsImlzX2Fub255bW91cyI6ZmFsc2V9.t0Fj-kgZFxNSW116ehCc-6U_7_B4ue2oyA1TQZ2CB_k'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0 && data[0].is_consultant === true) {
+                    results.innerHTML += '<p style="color: green">✅ Database Profile: CONSULTANT role verified</p>';
+                } else {
+                    results.innerHTML += '<p style="color: orange">⚠️ Database Profile: May need verification</p>';
+                    results.innerHTML += '<p>Profile data: ' + JSON.stringify(data) + '</p>';
+                }
+            })
+            .catch(error => {
+                results.innerHTML += '<p style="color: red">❌ Database Profile: CONNECTION ERROR</p>';
+            });
+        }, 2000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+---
+alwaysApply: true
+---
+
+# Claude Code Kimi K2 Integration
+
+This project is configured to use the Kimi K2 model as the backend for the Claude Code IDE.
+
+The `kemi-claude-cli.sh` script is the designated tool for this purpose. It correctly sets the required environment variables (`ANTHROPIC_AUTH_TOKEN` and `ANTHROPIC_BASE_URL`) to route all API requests to the Moonshot AI endpoint.
+
+**Usage:**
+
+To interact with the Claude Code IDE using the Kimi K2 backend, execute the following command:
+
+```bash
+./kemi-claude-cli.sh "Your prompt for Claude Code"
+```
+
+**Example:**
+
+```bash
+./kemi-claude-cli.sh "Explain recursion in Python with a simple code example."
+```
+
+All token usage and associated costs will be billed to the Moonshot AI account associated with the `ANTHROPIC_AUTH_TOKEN`.

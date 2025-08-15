@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Tracking Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .test-section {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+        .button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        .result {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Activity Tracking Test</h1>
+        
+        <div class="test-section">
+            <h3>📊 Test Database Connection</h3>
+            <p>This will test if we can connect to the Supabase database and check the interactions table.</p>
+            <button class="button" onclick="testDatabaseConnection()">Test Database Connection</button>
+            <div id="db-result" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>👤 Test Login Event</h3>
+            <p>This will simulate a login event and insert it into the database.</p>
+            <button class="button" onclick="testLoginEvent()">Simulate Login Event</button>
+            <div id="login-result" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>📈 Test Currently Logged In Users</h3>
+            <p>This will query for users who logged in within the last 30 minutes.</p>
+            <button class="button" onclick="testLoggedInUsers()">Get Currently Logged In Users</button>
+            <div id="users-result" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>🔄 Test Activity Stats</h3>
+            <p>This will get activity statistics for the last 24 hours.</p>
+            <button class="button" onclick="testActivityStats()">Get Activity Statistics</button>
+            <div id="stats-result" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="test-section info">
+            <h3>ℹ️ How to Use</h3>
+            <ol>
+                <li>First, test the database connection</li>
+                <li>Simulate a login event to create test data</li>
+                <li>Check currently logged in users</li>
+                <li>View activity statistics</li>
+                <li>Open the consultant dashboard to see the data</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        // Supabase configuration (you'll need to update these with your actual values)
+        const SUPABASE_URL = 'http://localhost:54321'; // or your actual Supabase URL
+        const SUPABASE_ANON_KEY = 'your-anon-key'; // you'll need to update this
+
+        function showResult(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `result ${type}`;
+            element.style.display = 'block';
+        }
+
+        async function testDatabaseConnection() {
+            showResult('db-result', 'Testing database connection...', 'info');
+            
+            try {
+                // This is a simplified test - in a real app you'd use the Supabase client
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/interactions?select=count`, {
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
+
+                if (response.ok) {
+                    showResult('db-result', '✅ Database connection successful!\nInteractions table is accessible.', 'success');
+                } else {
+                    showResult('db-result', `❌ Database connection failed.\nStatus: ${response.status}\nError: ${response.statusText}`, 'error');
+                }
+            } catch (error) {
+                showResult('db-result', `❌ Database connection failed.\nError: ${error.message}\n\nMake sure:\n1. Supabase is running\n2. URL and API key are correct\n3. Interactions table exists`, 'error');
+            }
+        }
+
+        async function testLoginEvent() {
+            showResult('login-result', 'Creating test login event...', 'info');
+            
+            try {
+                const testUserId = 'test-user-' + Date.now();
+                const loginEvent = {
+                    user_id: testUserId,
+                    event_type: 'LOGIN',
+                    created_at: new Date().toISOString()
+                };
+
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/interactions`, {
+                    method: 'POST',
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify(loginEvent)
+                });
+
+                if (response.ok) {
+                    showResult('login-result', `✅ Login event created successfully!\nUser ID: ${testUserId}\nTime: ${loginEvent.created_at}\n\nThis user will appear in the "Currently Logged In" list for 30 minutes.`, 'success');
+                } else {
+                    const errorText = await response.text();
+                    showResult('login-result', `❌ Failed to create login event.\nStatus: ${response.status}\nError: ${errorText}`, 'error');
+                }
+            } catch (error) {
+                showResult('login-result', `❌ Failed to create login event.\nError: ${error.message}`, 'error');
+            }
+        }
+
+        async function testLoggedInUsers() {
+            showResult('users-result', 'Fetching currently logged in users...', 'info');
+            
+            try {
+                const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000).toISOString();
+                
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/interactions?select=user_id,created_at&event_type=eq.LOGIN&created_at=gte.${thirtyMinutesAgo}&order=created_at.desc`, {
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const uniqueUsers = [...new Set(data.map(item => item.user_id))];
+                    
+                    showResult('users-result', `✅ Found ${data.length} login events from ${uniqueUsers.length} unique users in the last 30 minutes:\n\n${data.map((event, index) => `${index + 1}. User: ${event.user_id}\n   Time: ${event.created_at}`).join('\n')}`, 'success');
+                } else {
+                    const errorText = await response.text();
+                    showResult('users-result', `❌ Failed to fetch logged in users.\nStatus: ${response.status}\nError: ${errorText}`, 'error');
+                }
+            } catch (error) {
+                showResult('users-result', `❌ Failed to fetch logged in users.\nError: ${error.message}`, 'error');
+            }
+        }
+
+        async function testActivityStats() {
+            showResult('stats-result', 'Fetching activity statistics...', 'info');
+            
+            try {
+                const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+                
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/interactions?select=event_type,created_at&created_at=gte.${oneDayAgo}`, {
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Count events by type
+                    const stats = {};
+                    data.forEach(event => {
+                        stats[event.event_type] = (stats[event.event_type] || 0) + 1;
+                    });
+                    
+                    showResult('stats-result', `✅ Activity statistics for the last 24 hours:\n\nTotal events: ${data.length}\n\nEvent breakdown:\n${Object.entries(stats).map(([type, count]) => `- ${type}: ${count}`).join('\n')}`, 'success');
+                } else {
+                    const errorText = await response.text();
+                    showResult('stats-result', `❌ Failed to fetch activity stats.\nStatus: ${response.status}\nError: ${errorText}`, 'error');
+                }
+            } catch (error) {
+                showResult('stats-result', `❌ Failed to fetch activity stats.\nError: ${error.message}`, 'error');
+            }
+        }
+
+        // Add some helpful instructions
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Activity Tracking Test Page Loaded');
+            console.log('Make sure to update SUPABASE_URL and SUPABASE_ANON_KEY with your actual values');
+        });
+    </script>
+</body>
+</html> 

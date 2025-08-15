@@ -1,0 +1,64 @@
+{
+  "name": "alice-suite",
+  "version": "1.0.0",
+  "description": "Alice Suite - Educational Reading Platform with Reader and Consultant Dashboard",
+  "private": true,
+  "workspaces": [
+    "alice-reader",
+    "alice-consultant-dashboard"
+  ],
+  "scripts": {
+    "dev": "npm run dev:all",
+    "dev:all": "./start-both-apps.sh",
+    "dev:reader": "cd alice-reader && npm run dev",
+    "dev:dashboard": "cd alice-consultant-dashboard && npm run dev",
+    "build": "npm run build:all",
+    "build:all": "npm run build:reader && npm run build:dashboard",
+    "build:reader": "cd alice-reader && npm run build",
+    "build:dashboard": "cd alice-consultant-dashboard && npm run build",
+    "preview": "npm run preview:all",
+    "preview:all": "npm run preview:reader & npm run preview:dashboard",
+    "preview:reader": "cd alice-reader && npm run preview",
+    "preview:dashboard": "cd alice-consultant-dashboard && npm run preview",
+    "install:all": "npm install && cd alice-reader && npm install && cd ../alice-consultant-dashboard && npm install",
+    "check-env": "node scripts/check-env.js",
+    "test": "npm run test:reader && npm run test:dashboard",
+    "test:reader": "cd alice-reader && npm test",
+    "test:dashboard": "cd alice-consultant-dashboard && npm test",
+    "test:auth-events": "node test-auth-events.js",
+    "test:e2e": "npm run test:auth-events",
+    "lint": "npm run lint:reader && npm run lint:dashboard",
+    "lint:reader": "cd alice-reader && npm run lint",
+    "lint:dashboard": "cd alice-consultant-dashboard && npm run lint",
+    "clean": "npm run clean:reader && npm run clean:dashboard",
+    "clean:reader": "cd alice-reader && rm -rf node_modules dist",
+    "clean:dashboard": "cd alice-consultant-dashboard && rm -rf node_modules dist",
+    "setup": "npm run install:all && npm run check-env"
+  },
+  "devDependencies": {
+    "axios": "^1.11.0",
+    "concurrently": "^8.2.2",
+    "socket.io-client": "^4.8.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/alice-suite.git"
+  },
+  "keywords": [
+    "education",
+    "reading",
+    "react",
+    "typescript",
+    "supabase",
+    "material-ui"
+  ],
+  "author": "Alice Suite Team",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.53.0"
+  }
+}

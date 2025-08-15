@@ -1,0 +1,85 @@
+
+> @alice-suite/realtime-server@1.0.0 start
+> node dist/index.js
+
+✅ Redis connected successfully
+✅ Redis connected successfully
+🚀 Realtime server running on port 3001
+📊 Health check: http://localhost:3001/health
+📈 Stats: http://localhost:3001/stats
+❌ Error getting dashboard stats: {
+  code: '42P01',
+  details: null,
+  hint: null,
+  message: 'relation "public.consultant_dashboard_view" does not exist'
+}
+❌ Error in getDashboardStats: {
+  code: '42P01',
+  details: null,
+  hint: null,
+  message: 'relation "public.consultant_dashboard_view" does not exist'
+}
+❌ Error getting online users: {
+  code: '42P01',
+  details: null,
+  hint: null,
+  message: 'relation "public.active_readers_view" does not exist'
+}
+❌ Error in getOnlineUsers: {
+  code: '42P01',
+  details: null,
+  hint: null,
+  message: 'relation "public.active_readers_view" does not exist'
+}
+❌ Error getting dashboard stats: {
+  code: '42P01',
+  details: null,
+  hint: null,
+  message: 'relation "public.consultant_dashboard_view" does not exist'
+}
+❌ Error in getDashboardStats: {
+  code: '42P01',
+  details: null,
+  hint: null,
+  message: 'relation "public.consultant_dashboard_view" does not exist'
+}
+❌ Error getting online users: {
+  code: '42P01',
+  details: null,
+  hint: null,
+  message: 'relation "public.active_readers_view" does not exist'
+}
+❌ Error in getOnlineUsers: {
+  code: '42P01',
+  details: null,
+  hint: null,
+  message: 'relation "public.active_readers_view" does not exist'
+}
+❌ Error getting dashboard stats: {
+  code: '42P01',
+  details: null,
+  hint: null,
+  message: 'relation "public.consultant_dashboard_view" does not exist'
+}
+❌ Error in getDashboardStats: {
+  code: '42P01',
+  details: null,
+  hint: null,
+  message: 'relation "public.consultant_dashboard_view" does not exist'
+}
+❌ Error getting online users: {
+  code: '42P01',
+  details: null,
+  hint: null,
+  message: 'relation "public.active_readers_view" does not exist'
+}
+❌ Error in getOnlineUsers: {
+  code: '42P01',
+  details: null,
+  hint: null,
+  message: 'relation "public.active_readers_view" does not exist'
+}
+🛑 Shutting down realtime server...
+✅ Event queue service shutdown complete
+🔌 Redis disconnected
+✅ Server closed successfully

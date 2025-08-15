@@ -1,0 +1,11 @@
+---
+alwaysApply: false
+---
+
+# Kimi K2 Assistant
+
+@kimi-assist
+
+Use Kimi K2 AI assistant for development tasks, code review, and technical discussions.
+
+Refer to the instructions located in @~/.agent-os/instructions/kimi-assist.md

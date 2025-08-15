@@ -1,0 +1,10 @@
+
+> alice-consultant-dashboard@1.0.0 dev
+> vite
+
+[dotenv@17.2.1] injecting env (15) from .env -- tip: 📡 auto-backup env with Radar: https://dotenvx.com/radar
+
+  VITE v4.5.14  ready in 169 ms
+
+  ➜  Local:   http://localhost:5174/
+  ➜  Network: http://192.168.3.220:5174/

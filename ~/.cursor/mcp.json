@@ -1,0 +1,42 @@
+{
+  "mcpServers": {
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y", 
+        "@supabase/mcp-server-supabase@latest",
+        "--access-token",
+        "sbp_d6b569d284a5a20eb803995b921e2126fb848afd"
+      ]
+    },
+    "context7": {
+      "command": "claude",
+      "args": [
+        "mcp",
+        "add",
+        "transport",
+        "http",
+        "context",
+        "7"
+      ]
+    },
+    "firecrawl": {
+      "command": "claude",
+      "args": [
+        "mcp",
+        "add",
+        "transport",
+        "http",
+        "firecrawl",
+        "fc-5162e353baef4ac79e257cd4141bd336"
+      ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-playwright@latest"
+      ]
+    }
+  }
+} 

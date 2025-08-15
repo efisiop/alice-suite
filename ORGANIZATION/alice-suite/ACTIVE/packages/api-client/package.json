@@ -1,0 +1,20 @@
+{
+  "name": "@alice-suite/api-client",
+  "version": "1.0.0",
+  "description": "Shared API client for Alice Suite applications",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@types/node": "^24.2.0",
+    "socket.io-client": "^4.8.1",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0"
+  }
+}

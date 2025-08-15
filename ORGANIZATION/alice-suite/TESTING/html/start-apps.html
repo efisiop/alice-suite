@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alice Suite - Start Apps</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .step {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        .step h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .code {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+        }
+        .button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+        .success {
+            border-left-color: #28a745;
+        }
+        .warning {
+            border-left-color: #ffc107;
+        }
+        .info {
+            border-left-color: #17a2b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Alice Suite - Start Apps</h1>
+        
+        <div class="step info">
+            <h3>📋 Prerequisites</h3>
+            <p>Make sure you have Node.js installed and the dependencies are installed:</p>
+            <div class="code">
+                # In alice-reader folder<br>
+                npm install<br><br>
+                # In alice-consultant-dashboard folder<br>
+                npm install
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>🎯 Option 1: Use System Terminal</h3>
+            <p>Open your system terminal (Terminal on Mac, Command Prompt on Windows) and run:</p>
+            
+            <h4>For Alice Reader:</h4>
+            <div class="code">
+                cd /Users/efisiopittau/Project_1/alice-suite/alice-reader<br>
+                npm run dev
+            </div>
+            <p>This will start the reader app on <strong>http://localhost:4002</strong></p>
+            
+            <h4>For Consultant Dashboard:</h4>
+            <div class="code">
+                cd /Users/efisiopittau/Project_1/alice-suite/alice-consultant-dashboard<br>
+                npm run dev
+            </div>
+            <p>This will start the dashboard on <strong>http://localhost:4001</strong></p>
+        </div>
+
+        <div class="step">
+            <h3>🔧 Option 2: Use VS Code Terminal</h3>
+            <p>If you have VS Code installed:</p>
+            <ol>
+                <li>Open VS Code</li>
+                <li>Open the <code>alice-suite</code> folder</li>
+                <li>Press <code>Ctrl+`</code> (or <code>Cmd+`</code> on Mac) to open terminal</li>
+                <li>Run the commands from Option 1</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3>🌐 Option 3: Use Built Versions</h3>
+            <p>If the apps are already built, you can serve them directly:</p>
+            
+            <h4>For Alice Reader:</h4>
+            <div class="code">
+                cd /Users/efisiopittau/Project_1/alice-suite/alice-reader<br>
+                npm run build<br>
+                npx serve -s dist
+            </div>
+            
+            <h4>For Consultant Dashboard:</h4>
+            <div class="code">
+                cd /Users/efisiopittau/Project_1/alice-suite/alice-consultant-dashboard<br>
+                npm run build<br>
+                npx serve -s dist
+            </div>
+        </div>
+
+        <div class="step success">
+            <h3>✅ Test the Activity Tracking</h3>
+            <p>Once both apps are running:</p>
+            <ol>
+                <li>Open <strong>http://localhost:4002</strong> (Alice Reader)</li>
+                <li>Login with any user account</li>
+                <li>Open <strong>http://localhost:4001</strong> (Consultant Dashboard)</li>
+                <li>Login as a consultant</li>
+                <li>Check the "Currently Logged In" card and tab</li>
+            </ol>
+        </div>
+
+        <div class="step warning">
+            <h3>🐛 Troubleshooting</h3>
+            <p><strong>If terminal doesn't work in Cursor:</strong></p>
+            <ul>
+                <li>Use your system terminal instead</li>
+                <li>Try VS Code's integrated terminal</li>
+                <li>Check if Node.js is installed: <code>node --version</code></li>
+                <li>Make sure you're in the correct directory</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="http://localhost:4002" class="button" target="_blank">Open Alice Reader</a>
+            <a href="http://localhost:4001" class="button" target="_blank">Open Consultant Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if apps are running
+            function checkApp(url, button) {
+                fetch(url, { mode: 'no-cors' })
+                    .then(() => {
+                        button.style.background = '#28a745';
+                        button.textContent = '✅ ' + button.textContent.replace('Open ', '');
+                    })
+                    .catch(() => {
+                        button.style.background = '#dc3545';
+                        button.textContent = '❌ ' + button.textContent.replace('Open ', '');
+                    });
+            }
+
+            // Check apps after a delay
+            setTimeout(() => {
+                const buttons = document.querySelectorAll('.button');
+                checkApp('http://localhost:4002', buttons[0]);
+                checkApp('http://localhost:4001', buttons[1]);
+            }, 2000);
+        });
+    </script>
+</body>
+</html> 
