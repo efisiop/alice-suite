@@ -6,7 +6,7 @@ import baseUrlPlugin from './vite-base-url-plugin'
 // Use GitHub Pages base path in production, local path in development
 const getBase = (mode: string) => {
   if (mode === 'production') {
-    return '/alice-reader-app-final/' // Correct repository name for GitHub Pages
+    return '/alice-suite/' // Repository name for GitHub Pages
   }
   return '/'
 }

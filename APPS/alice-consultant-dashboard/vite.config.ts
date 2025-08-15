@@ -6,8 +6,18 @@ import { config } from "dotenv"
 // Load environment variables from .env file
 config()
 
-export default defineConfig({
-  plugins: [react()],
+export default defineConfig(({ mode }) => {
+  // Use GitHub Pages base path in production, local path in development
+  const getBase = (mode: string) => {
+    if (mode === 'production') {
+      return '/alice-suite/' // Repository name for GitHub Pages
+    }
+    return '/'
+  }
+
+  return {
+    plugins: [react()],
+    base: getBase(mode),
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -49,4 +59,4 @@ export default defineConfig({
       ]
     }
   }
-})
+  })
