@@ -18,17 +18,21 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-        cache: 'npm'
+        
+    - name: Install shared API client dependencies
+      run: |
+        cd APPS/alice-suite-monorepo/packages/api-client
+        npm install
         
     - name: Install dependencies for Alice Reader
       run: |
         cd APPS/alice-reader
-        npm ci
+        npm install
         
     - name: Install dependencies for Consultant Dashboard
       run: |
         cd APPS/alice-consultant-dashboard
-        npm ci
+        npm install
         
     - name: Build Alice Reader
       run: |
