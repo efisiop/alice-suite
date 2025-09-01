@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Alice Consultant Dashboard - Manage Readers and Help Requests" />
-    <title>Alice Consultant Dashboard</title>
+    <meta name="description" content="Alice in Wonderland Reader AI Companion" />
+    <title>Alice Reader</title>
 
     <!-- Fallback environment variables (use only if .env fails) -->
     <script>
@@ -37,7 +37,10 @@
       }(window.location))
     </script>
     <!-- Debug script removed for production build -->
-    <script type="module" crossorigin src="/alice-suite/assets/index-25a21796.js"></script>
+    <script type="module" crossorigin src="/alice-suite/assets/index-f2f12b32.js"></script>
+    <link rel="modulepreload" crossorigin href="/alice-suite/assets/vendor-decc636a.js">
+    <link rel="modulepreload" crossorigin href="/alice-suite/assets/supabase-1a98d0a9.js">
+    <link rel="modulepreload" crossorigin href="/alice-suite/assets/ui-f211c0cf.js">
     <link rel="stylesheet" href="/alice-suite/assets/index-2759b95e.css">
   </head>
   <body>
@@ -45,7 +48,7 @@
       <!-- Fallback content while loading -->
       <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif;">
         <div style="text-align: center;">
-          <h2>Loading Alice Consultant Dashboard...</h2>
+          <h2>Loading Alice Reader...</h2>
           <p>If this message persists, please check your browser console for errors.</p>
         </div>
       </div>

@@ -37,6 +37,16 @@
         "-y",
         "@modelcontextprotocol/server-playwright@latest"
       ]
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@missionsquad/mcp-github@latest"
+      ],
+      "env": {
+        "GITHUB_TOKEN": "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"
+      }
     }
   }
-} 
+}

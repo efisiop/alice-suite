@@ -1,0 +1,54 @@
+name: Deploy Alice Suite to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies for Alice Reader
+      run: |
+        cd APPS/alice-reader
+        npm ci
+        
+    - name: Install dependencies for Consultant Dashboard
+      run: |
+        cd APPS/alice-consultant-dashboard
+        npm ci
+        
+    - name: Build Alice Reader
+      run: |
+        cd APPS/alice-reader
+        npm run build
+        
+    - name: Build Consultant Dashboard
+      run: |
+        cd APPS/alice-consultant-dashboard
+        npm run build
+        
+    - name: Prepare deployment files
+      run: |
+        mkdir -p docs/alice-reader docs/alice-consultant-dashboard
+        cp -r APPS/alice-reader/dist/* docs/alice-reader/
+        cp -r APPS/alice-consultant-dashboard/dist/* docs/alice-consultant-dashboard/
+        
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs

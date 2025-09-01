@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alice Suite - AI-Powered Reading Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+        
+        .apps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .app-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+        
+        .app-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .app-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .app-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        
+        .app-link:hover {
+            background: #5a6fd8;
+        }
+        
+        .features {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .features h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .features ul {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .features li {
+            padding: 0.5rem 0;
+            color: #666;
+        }
+        
+        .features li:before {
+            content: "✨ ";
+            margin-right: 0.5rem;
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">📚 Alice Suite</div>
+        <div class="subtitle">AI-Powered Reading Platform</div>
+        
+        <div class="description">
+            A comprehensive reading platform that combines AI-powered learning with human consultant support. 
+            Experience personalized reading assistance and real-time guidance from educators.
+        </div>
+        
+        <div class="apps">
+            <div class="app-card">
+                <div class="app-title">📖 Alice Reader</div>
+                <div class="app-description">
+                    The main reading application for students and learners. Features AI-powered assistance, 
+                    personalized learning paths, and interactive reading tools.
+                </div>
+                <a href="./alice-reader/" class="app-link">Launch Alice Reader</a>
+            </div>
+            
+            <div class="app-card">
+                <div class="app-title">👨‍🏫 Consultant Dashboard</div>
+                <div class="app-description">
+                    The dashboard for educators and consultants. Monitor student progress, provide real-time 
+                    assistance, and manage learning sessions.
+                </div>
+                <a href="./alice-consultant-dashboard/" class="app-link">Launch Dashboard</a>
+            </div>
+        </div>
+        
+        <div class="features">
+            <h3>Key Features</h3>
+            <ul>
+                <li>AI-powered reading assistance and comprehension support</li>
+                <li>Real-time consultant guidance and feedback</li>
+                <li>Personalized learning paths and progress tracking</li>
+                <li>Interactive reading tools and multimedia support</li>
+                <li>Comprehensive analytics and performance insights</li>
+                <li>Accessible design for diverse learning needs</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            Built with React, TypeScript, Supabase, and Material-UI
+        </div>
+    </div>
+</body>
+</html>
