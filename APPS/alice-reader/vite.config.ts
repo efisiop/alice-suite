@@ -55,6 +55,13 @@ export default defineConfig(({ mode }) => {
             './routes/TestRoutes',
           ],
         } : {}),
+        external: (id) => {
+          // Externalize Supabase dependencies to avoid build issues
+          if (id.includes('@supabase/supabase-js')) {
+            return true;
+          }
+          return false;
+        },
         output: {
           // Add hashes to filenames for cache busting
           entryFileNames: `assets/[name]-[hash].js`,

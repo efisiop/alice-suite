@@ -15,7 +15,6 @@
     "clean": "rm -rf logs/* node_modules/.cache"
   },
   "dependencies": {
-    "@alice-suite/api-client": "file:../alice-suite-monorepo/packages/api-client",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.19",
