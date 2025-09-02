@@ -19,11 +19,6 @@ jobs:
       with:
         node-version: '18'
         
-    - name: Install shared API client dependencies
-      run: |
-        cd APPS/alice-suite-monorepo/packages/api-client
-        npm install
-        
     - name: Install dependencies for Alice Reader
       run: |
         cd APPS/alice-reader
